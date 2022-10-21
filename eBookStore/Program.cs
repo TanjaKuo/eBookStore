@@ -1,4 +1,8 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<BookDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("BookConnectionString") ?? throw new InvalidOperationException("Connection string 'BookDbContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

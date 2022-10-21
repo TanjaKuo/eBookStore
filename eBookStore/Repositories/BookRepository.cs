@@ -22,7 +22,6 @@ namespace eBookStore.Repositories
 
         public async Task<IEnumerable<Book>> GetSearchBooks(string searchString)
         {
-            //var books = from m in _bookDbContext.Book select m;
             return await _bookDbContext.Book.Where(x => x.Title!.Contains(searchString)).ToListAsync();
         }
 

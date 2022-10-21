@@ -28,12 +28,22 @@ namespace eBookStore.Controllers
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                var seachedResult = new BookViewModel
-                {
-                    Books = (List<Book>)await _bookRepository.GetSearchBooks(searchString)
-                };
+                var seachedBook = await _bookRepository.GetSearchBooks(searchString);
 
-                return View(seachedResult);
+                if(!seachedBook.Any())
+                {
+                    return View();
+                }
+
+                else
+                {
+                    var seachedResult = new BookViewModel
+                    {
+                        Books = (List<Book>)await _bookRepository.GetSearchBooks(searchString)
+                    };
+
+                    return View(seachedResult);
+                }
             }
             else
             {
@@ -42,8 +52,8 @@ namespace eBookStore.Controllers
                     Books = (List<Book>)await _bookRepository.GetAllBooks()
                 };
             return View(noSearch);
-    }
-        }
+         }
+   }
 
         // GET: Book/Details/5
         //public async Task<IActionResult> Details(Guid? id)

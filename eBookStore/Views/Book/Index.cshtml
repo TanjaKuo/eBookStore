@@ -32,11 +32,11 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
-        @if (Model.Books.Any())
-        {
-            foreach (var item in Model.Books)
+        @if (Model != null && Model.Books != null && Model.Books.Any())
             {
+            @foreach (var item in Model.Books)
+            {
+             <tbody>
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.Title)
@@ -50,11 +50,17 @@
                         <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                     </td>
                 </tr>
+             </tbody>
             }
         }
         else
             {
-                <p>Nothing</p>
+                <tbody>
+                    <tr>
+                        <td>
+                            <p>Sorry, this book is not exist. </p>
+                        </td>
+                    </tr>
+                </tbody>
             }
-    </tbody>
 </table>

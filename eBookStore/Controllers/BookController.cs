@@ -55,6 +55,47 @@ namespace eBookStore.Controllers
          }
    }
 
+
+        //// GET: Book/Edit/5
+        public async Task<IActionResult> Edit(Guid? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var book = await _bookRepository.GetSingleBook(id);
+
+            if (book == null)
+            {
+                return NotFound();
+            }
+            return View(book);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        // Guid id, [Bind("Id,Title,Reserve")] Book book
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Title,Reserve,ReserveNumber")] Book book)
+        {
+            var specifBook = new Book
+            {
+                Id = book.Id,
+                Title = book.Title,
+                Reserve = book.Reserve
+            };
+
+            if(specifBook != null)
+            {
+                if(specifBook.Reserve == true)
+                {
+                    var number = Guid.NewGuid();
+                }
+                await _bookRepository.UpdateReserve(specifBook);
+            }
+
+            return RedirectToAction("Index");
+        }
+
         // GET: Book/Details/5
         //public async Task<IActionResult> Details(Guid? id)
         //{
@@ -96,57 +137,41 @@ namespace eBookStore.Controllers
         //    return View(book);
         //}
 
-        //// GET: Book/Edit/5
-        //public async Task<IActionResult> Edit(Guid? id)
-        //{
-        //    if (id == null || _context.Book == null)
-        //    {
-        //        return NotFound();
-        //    }
 
-        //    var book = await _context.Book.FindAsync(id);
-        //    if (book == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(book);
-        //}
 
         // POST: Book/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(Guid id, [Bind("Id,Title,Reserve")] Book book)
-        //{
-        //    if (id != book.Id)
-        //    {
-        //        return NotFound();
-        //    }
 
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            _context.Update(book);
-        //            await _context.SaveChangesAsync();
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!BookExists(book.Id))
-        //            {
-        //                return NotFound();
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(book);
+
+        //if (id != book.Id)
+        //{
+        //    return NotFound();
         //}
 
-       
+        //if (ModelState.IsValid)
+        //{
+        //    try
+        //    {
+        //        _bookRepository.Update(book);
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!BookExists(book.Id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
+        //    return RedirectToAction(nameof(Index));
+        //}
+        //  return View(book);
+        //  }
+
+
     }
 }

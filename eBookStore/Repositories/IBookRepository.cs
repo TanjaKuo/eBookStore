@@ -10,10 +10,11 @@ namespace eBookStore.Repositories
 
         Task<IEnumerable<Book>> GetSearchBooks(string searchString);
 
-
         Task<Book> GetSingleBook(Guid? id);
 
-        Task<Book> UpdateReserve(bool reserver);
+        Task<Book> UpdateReserve(Book book);
+
+        Task<List<Guid>> GenerateNumber(Guid number);
     }
 }
 

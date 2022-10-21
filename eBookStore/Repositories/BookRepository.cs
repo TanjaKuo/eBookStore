@@ -14,6 +14,10 @@ namespace eBookStore.Repositories
             _bookDbContext = bookDbContext;
         }
 
+        public Task<List<Guid>> GenerateNumber(Guid number)
+        {
+            throw new NotImplementedException();
+        }
 
         public async Task<IEnumerable<Book>> GetAllBooks()
         {
@@ -30,10 +34,21 @@ namespace eBookStore.Repositories
             return await _bookDbContext.Book.FirstOrDefaultAsync(m => m.Id == id);
         }
 
-        Task<Book> IBookRepository.UpdateReserve(bool reserver)
+        public async Task<Book> UpdateReserve(Book book)
         {
-            throw new NotImplementedException();
+            var existingBook = await _bookDbContext.Book.FirstOrDefaultAsync(x => x.Id == book.Id);
+
+            if (existingBook != null)
+            {
+                existingBook.Id = book.Id;
+                existingBook.Title = book.Title;
+                existingBook.Reserve = book.Reserve;
+            }
+
+            await _bookDbContext.SaveChangesAsync();
+            return existingBook;
         }
+
     }
 }
 

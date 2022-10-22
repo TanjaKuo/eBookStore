@@ -10,6 +10,8 @@ namespace eBookStore.Models
         public Guid BookId { get; set; }
 
         public DateTime ReservedTime { get; set; }
+
+        public ICollection<User> Users { get; set; }
     }
 }
 

@@ -14,11 +14,7 @@ namespace eBookStore.Repositories
             _bookDbContext = bookDbContext;
         }
 
-        public Task<List<Guid>> GenerateNumber(Guid number)
-        {
-            throw new NotImplementedException();
-        }
-
+   
         public async Task<IEnumerable<Book>> GetAllBooks()
         {
             return await _bookDbContext.Book.ToListAsync();

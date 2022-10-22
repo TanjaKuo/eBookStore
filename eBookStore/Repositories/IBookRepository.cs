@@ -18,8 +18,6 @@ namespace eBookStore.Repositories
 
         Task<Book> UpdateBookingNumber(Guid id, Guid? bookingNumber);
 
-        Task<List<Guid>> GenerateNumber(Guid number);
-
     }
 }
 

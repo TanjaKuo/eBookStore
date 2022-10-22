@@ -17,7 +17,6 @@ namespace eBookStore.Models
         // navigation 
         public ICollection<Reserve> ReserveDetails { get; set; }
 
-        public ICollection<User> Users { get; set; }
 
     }
 }

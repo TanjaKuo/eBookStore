@@ -28,8 +28,6 @@ namespace eBookStore.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Index(string searchString)
         {
-            
-
             if (!string.IsNullOrEmpty(searchString))
             {
                 var seachedBook = await _bookRepository.GetSearchBooks(searchString);

@@ -1,15 +1,29 @@
 ﻿<Properties StartupConfiguration="{92D04636-1646-420C-A1DF-F8392102D855}|Default">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.eBookStore PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="eBookStore/Repositories/ReserveRepository.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="eBookStore/Repositories/AccountRepository.cs">
     <Files>
-      <File FileName="eBookStore/Repositories/ReserveRepository.cs" Line="26" Column="1" IsPinned="True" />
-      <File FileName="eBookStore/Controllers/BookController.cs" Line="24" Column="1" />
-      <File FileName="eBookStore/Models/Book.cs" Line="21" Column="1" />
-      <File FileName="eBookStore/Models/Reserve.cs" Line="14" Column="1" />
-      <File FileName="eBookStore/Repositories/IReserveRepository.cs" Line="12" Column="1" />
+      <File FileName="eBookStore/Data/BookDbContext.cs" Line="20" Column="1" />
+      <File FileName="eBookStore/Models/User.cs" Line="16" Column="1" />
+      <File FileName="eBookStore/Models/Book.cs" Line="20" Column="55" />
+      <File FileName="eBookStore/Controllers/BookController.cs" Line="103" Column="46" />
+      <File FileName="eBookStore/Views/Account/Login.cshtml" Line="17" Column="63" />
+      <File FileName="eBookStore/Views/Account/Register.cshtml" Line="30" Column="15" />
+      <File FileName="eBookStore/Views/Book/Create.cshtml" Line="30" Column="7" />
+      <File FileName="eBookStore/Views/Shared/_Layout.cshtml" Line="20" Column="77" />
+      <File FileName="eBookStore/Controllers/AccountController.cs" Line="31" Column="1" />
+      <File FileName="eBookStore/Models/BookViewModel.cs" Line="20" Column="1" />
+      <File FileName="eBookStore/Views/Book/Index.cshtml" Line="1" Column="1" />
+      <File FileName="eBookStore/Views/Book/Edit.cshtml" Line="2" Column="1" />
+      <File FileName="eBookStore/Repositories/IAccountRepository.cs" Line="11" Column="20" />
+      <File FileName="eBookStore/Repositories/IBookRepository.cs" Line="24" Column="1" />
+      <File FileName="eBookStore/Repositories/AccountRepository.cs" Line="23" Column="1" />
+      <File FileName="eBookStore/Repositories/BookRepository.cs" Line="17" Column="4" />
+      <File FileName="eBookStore/Models/UserViewModel.cs" Line="9" Column="45" />
+      <File FileName="eBookStore/Repositories/ReserveRepository.cs" Line="26" Column="43" />
+      <File FileName="eBookStore/Program.cs" Line="14" Column="1" />
+      <File FileName="eBookStore/Repositories/IReserveRepository.cs" Line="1" Column="1" />
+      <File FileName="eBookStore/Models/Reserve.cs" Line="1" Column="1" />
+      <File FileName="eBookStore/Migrations/20221022115324_adding-user.cs" Line="1" Column="1" />
+      <File FileName="eBookStore/Migrations/20221022125349_remove-bookid-from-user.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -17,13 +31,13 @@
           <Node name="eBookStore" expanded="True">
             <Node name="eBookStore" expanded="True">
               <Node name="Controllers" expanded="True" />
-              <Node name="Data" expanded="True" />
               <Node name="Migrations" expanded="True" />
               <Node name="Models" expanded="True" />
               <Node name="Repositories" expanded="True">
-                <Node name="ReserveRepository.cs" selected="True" />
+                <Node name="AccountRepository.cs" selected="True" />
               </Node>
               <Node name="Views" expanded="True">
+                <Node name="Account" expanded="True" />
                 <Node name="Book" expanded="True" />
                 <Node name="Shared" expanded="True" />
               </Node>
@@ -38,7 +52,17 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/tanya/Projects/eBookStore/eBookStore/Repositories/BookRepository.cs" relfile="eBookStore/Repositories/BookRepository.cs" line="38" column="1" />
+      <Breakpoint file="/Users/tanya/Projects/eBookStore/eBookStore/Controllers/BookController.cs" relfile="eBookStore/Controllers/BookController.cs" line="83" column="1" />
+      <Breakpoint file="/Users/tanya/Projects/eBookStore/eBookStore/Repositories/ReserveRepository.cs" relfile="eBookStore/Repositories/ReserveRepository.cs" line="17" column="1" />
+      <Breakpoint file="/Users/tanya/Projects/eBookStore/eBookStore/Repositories/ReserveRepository.cs" relfile="eBookStore/Repositories/ReserveRepository.cs" line="46" column="1" />
+      <Breakpoint file="/Users/tanya/Projects/eBookStore/eBookStore/Repositories/ReserveRepository.cs" relfile="eBookStore/Repositories/ReserveRepository.cs" line="79" column="1" />
+      <Breakpoint file="/Users/tanya/Projects/eBookStore/eBookStore/Repositories/AccountRepository.cs" relfile="eBookStore/Repositories/AccountRepository.cs" line="18" column="1" />
+      <Breakpoint file="/Users/tanya/Projects/eBookStore/eBookStore/Controllers/AccountController.cs" relfile="eBookStore/Controllers/AccountController.cs" line="31" column="1" />
+      <Breakpoint file="/Users/tanya/Projects/eBookStore/eBookStore/Repositories/AccountRepository.cs" relfile="eBookStore/Repositories/AccountRepository.cs" line="23" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.eBookStore PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
 </Properties>

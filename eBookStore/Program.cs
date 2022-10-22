@@ -10,6 +10,7 @@ builder.Services.AddDbContext<BookDbContext>(options =>
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IReserveRepository, ReserveRepository>();
+builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 
 var app = builder.Build();
 

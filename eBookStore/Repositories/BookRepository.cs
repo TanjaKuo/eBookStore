@@ -24,6 +24,11 @@ namespace eBookStore.Repositories
             return await _bookDbContext.Book.ToListAsync();
         }
 
+        public async Task<IEnumerable<Book>> GetAllBooksWithBookingNumber(Guid bookingNumber)
+        {
+            return await _bookDbContext.Book.Include(nameof(Reserve)).ToListAsync();
+        }
+
         public async Task<IEnumerable<Book>> GetSearchBooks(string searchString)
         {
             return await _bookDbContext.Book.Where(x => x.Title!.Contains(searchString)).ToListAsync();
@@ -34,6 +39,23 @@ namespace eBookStore.Repositories
             return await _bookDbContext.Book.FirstOrDefaultAsync(m => m.Id == id);
         }
 
+
+        public async Task<Book> UpdateBookingNumber(Guid id, Guid? bookingNumber)
+        {
+            var existingBook = await _bookDbContext.Book.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (existingBook != null)
+            {
+                existingBook.BookingNumber = bookingNumber;
+            }
+
+            await _bookDbContext.SaveChangesAsync();
+            return existingBook;
+
+        }
+
+        
+
         public async Task<Book> UpdateReserve(Book book)
         {
             var existingBook = await _bookDbContext.Book.FirstOrDefaultAsync(x => x.Id == book.Id);
@@ -43,6 +65,16 @@ namespace eBookStore.Repositories
                 existingBook.Id = book.Id;
                 existingBook.Title = book.Title;
                 existingBook.Reserve = book.Reserve;
+                //existingBook.BookingNumber = null;
+                if (book.Reserve == true)
+                {
+                    existingBook.BookingNumber = existingBook.BookingNumber;
+                }
+                else
+                {
+                    existingBook.BookingNumber = null;
+                }
+
             }
 
             await _bookDbContext.SaveChangesAsync();

@@ -15,9 +15,12 @@ namespace eBookStore.Controllers
     {
         private readonly IBookRepository _bookRepository;
 
-        public BookController(IBookRepository bookRepository)
+        private readonly IReserveRepository _reserveRepository;
+
+        public BookController(IBookRepository bookRepository, IReserveRepository reserveRepository)
         {
             _bookRepository = bookRepository;
+            _reserveRepository = reserveRepository;
         }
 
       
@@ -25,6 +28,7 @@ namespace eBookStore.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Index(string searchString)
         {
+            
 
             if (!string.IsNullOrEmpty(searchString))
             {
@@ -50,7 +54,7 @@ namespace eBookStore.Controllers
                 var noSearch = new BookViewModel
                 {
                     Books = (List<Book>)await _bookRepository.GetAllBooks()
-                };
+            };
             return View(noSearch);
          }
    }
@@ -63,12 +67,14 @@ namespace eBookStore.Controllers
             {
                 return NotFound();
             }
+
             var book = await _bookRepository.GetSingleBook(id);
 
             if (book == null)
             {
                 return NotFound();
-            }
+            }            
+
             return View(book);
         }
 
@@ -81,16 +87,19 @@ namespace eBookStore.Controllers
             {
                 Id = book.Id,
                 Title = book.Title,
-                Reserve = book.Reserve
+                Reserve = book.Reserve,
             };
 
             if(specifBook != null)
             {
                 if(specifBook.Reserve == true)
                 {
-                    var number = Guid.NewGuid();
+                    await _reserveRepository.GenerateBookingNumberAsync(book.Id);
+                    var abc = await _reserveRepository.GetBookingNumberAsync(book.Id);
+                    await _bookRepository.UpdateBookingNumber(book.Id, abc);
                 }
                 await _bookRepository.UpdateReserve(specifBook);
+
             }
 
             return RedirectToAction("Index");

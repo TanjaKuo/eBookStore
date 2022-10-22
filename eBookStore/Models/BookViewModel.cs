@@ -12,7 +12,8 @@ namespace eBookStore.Models
 
         public bool Reserve { get; set; }
 
-        public Guid ReserveNumber { get; set; }
+        public List<Reserve> BookingNumber { get; set; }
+
     }
 }
 

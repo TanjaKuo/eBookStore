@@ -14,5 +14,6 @@ using eBookStore.Models;
 
         public DbSet<eBookStore.Models.Book> Book { get; set; } = default!;
         public DbSet<eBookStore.Models.Reserve> Reserves { get; set; }
+        public DbSet<eBookStore.Models.User> User { get; set; }
 
 }

@@ -1,4 +1,44 @@
 ﻿<Properties StartupConfiguration="{92D04636-1646-420C-A1DF-F8392102D855}|Default">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.eBookStore FirstBuild="True" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.eBookStore PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="eBookStore/Repositories/ReserveRepository.cs">
+    <Files>
+      <File FileName="eBookStore/Repositories/ReserveRepository.cs" Line="26" Column="1" IsPinned="True" />
+      <File FileName="eBookStore/Controllers/BookController.cs" Line="24" Column="1" />
+      <File FileName="eBookStore/Models/Book.cs" Line="21" Column="1" />
+      <File FileName="eBookStore/Models/Reserve.cs" Line="14" Column="1" />
+      <File FileName="eBookStore/Repositories/IReserveRepository.cs" Line="12" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="eBookStore" expanded="True">
+            <Node name="eBookStore" expanded="True">
+              <Node name="Controllers" expanded="True" />
+              <Node name="Data" expanded="True" />
+              <Node name="Migrations" expanded="True" />
+              <Node name="Models" expanded="True" />
+              <Node name="Repositories" expanded="True">
+                <Node name="ReserveRepository.cs" selected="True" />
+              </Node>
+              <Node name="Views" expanded="True">
+                <Node name="Book" expanded="True" />
+                <Node name="Shared" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/tanya/Projects/eBookStore/eBookStore/Repositories/BookRepository.cs" relfile="eBookStore/Repositories/BookRepository.cs" line="38" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>

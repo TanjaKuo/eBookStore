@@ -8,6 +8,8 @@ namespace eBookStore.Models
         public Guid BookingNumber { get; set; }
 
         public Guid BookId { get; set; }
+
+        public DateTime ReservedTime { get; set; }
     }
 }
 

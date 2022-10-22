@@ -23,6 +23,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Books[0].Reserve)
             </th>
+
             <th></th>
         </tr>
     </thead>
@@ -31,19 +32,22 @@
             @foreach (var item in Model.Books)
             {
              <tbody>
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Title)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Reserve)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        
-                    </td>
-                </tr>
+                 <tr>
+                     <td>
+                         @Html.DisplayFor(modelItem => item.Title)
+                     </td>
+                     <td>
+                         @Html.DisplayFor(modelItem => item.Reserve)
+                     </td>
+                     <td>
+                         @Html.DisplayFor(modelItem => item.BookingNumber)
+                     </td>
+                     <td>
+                         <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                         <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+
+                     </td>
+                 </tr>
              </tbody>
             }
         }
@@ -58,3 +62,5 @@
                 </tbody>
             }
 </table>
+
+

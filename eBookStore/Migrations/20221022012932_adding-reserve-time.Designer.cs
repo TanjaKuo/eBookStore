@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace eBookStore.Migrations
 {
     [DbContext(typeof(BookDbContext))]
-    partial class BookDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221022012932_adding-reserve-time")]
+    partial class addingreservetime
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,9 +27,6 @@ namespace eBookStore.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("BookingNumber")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Reserve")
@@ -64,30 +63,6 @@ namespace eBookStore.Migrations
                     b.ToTable("Reserves");
                 });
 
-            modelBuilder.Entity("eBookStore.Models.User", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("BookId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BookId");
-
-                    b.ToTable("User");
-                });
-
             modelBuilder.Entity("eBookStore.Models.Reserve", b =>
                 {
                     b.HasOne("eBookStore.Models.Book", null)
@@ -97,20 +72,9 @@ namespace eBookStore.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("eBookStore.Models.User", b =>
-                {
-                    b.HasOne("eBookStore.Models.Book", null)
-                        .WithMany("Users")
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("eBookStore.Models.Book", b =>
                 {
                     b.Navigation("ReserveDetails");
-
-                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

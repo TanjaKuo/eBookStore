@@ -9,7 +9,7 @@ builder.Services.AddDbContext<BookDbContext>(options =>
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
-
+builder.Services.AddScoped<IReserveRepository, ReserveRepository>();
 
 var app = builder.Build();
 

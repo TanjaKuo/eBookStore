@@ -1,12 +1,16 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+
 namespace eBookStore.Models
 {
-    public class UserViewModel
+    public class UserViewModel 
     {
+        [Required]
+        public string Username { get; set; } = null!;
 
-        public string Name { get; set; }
-
-        public string Password { get; set; }
+        [Required]
+        [MinLength(6)]
+        public string Password { get; set; } = null!;
     }
 }
 

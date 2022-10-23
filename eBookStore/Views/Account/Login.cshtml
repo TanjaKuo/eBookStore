@@ -1,9 +1,19 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@*@model eBookStore.Models.User*@
+@model eBookStore.Models.UserViewModel
+
 
 @{
     ViewData["Title"] = "Login";
+}
+
+@if (Model != null)
+ {
+    <div class="container">
+        <div class="alert alert-success alert-dismissible fade show mb-5" role="alert">
+            @TempData["notification"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
 }
 
 
@@ -15,13 +25,13 @@
             <form method="post">
                 <div class="mb-3">
                     <label class="form-label">Username</label>
-                    <input type="text" class="form-control" required />
+                    <input type="text" class="form-control" asp-for="Username" required />
                     <span class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Password</label>
-                    <input type="password" class="form-control" required minlength="6" />
+                    <input type="password" class="form-control" asp-for="Password" required minlength="6" />
                     <span class="text-danger"></span>
                 </div>
 

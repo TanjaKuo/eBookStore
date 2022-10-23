@@ -1,16 +1,22 @@
+using eBookStore.Data;
 using eBookStore.Models;
 using eBookStore.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<BookDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("BookConnectionString") ?? throw new InvalidOperationException("Connection string 'BookDbContext' not found.")));
 
+builder.Services.AddDbContext<AuthDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AuthConnectionString") ?? throw new InvalidOperationException("Connection string 'BookDbContext' not found.")));
+
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AuthDbContext>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IReserveRepository, ReserveRepository>();
-builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+//builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 
 var app = builder.Build();
 
@@ -36,6 +42,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

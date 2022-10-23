@@ -1,9 +1,17 @@
-﻿@model eBookStore.Models.User
+﻿@*@model eBookStore.Models.User*@
+@model eBookStore.Models.UserViewModel
 
 
 @{
     ViewData["Title"] = "Register";
 }
+
+
+@*@if (Model != null)
+{
+    @ViewBag.Notification
+}*@
+
 
 <div class="cotainer mx-auto">
     <div class="row justify-content-center">
@@ -13,7 +21,7 @@
             <form method="post">
                 <div class="mb-3">
                     <label class="form-label">Username</label>
-                    <input type="text" class="form-control" asp-for="Name" required />
+                    <input type="text" class="form-control" asp-for="Username" required />
                     <span class="text-danger"></span>
                 </div>
 

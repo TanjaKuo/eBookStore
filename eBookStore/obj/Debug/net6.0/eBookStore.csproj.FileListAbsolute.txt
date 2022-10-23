@@ -288,3 +288,8 @@
 /Users/tanya/Projects/eBookStore/eBookStore/obj/Debug/net6.0/eBookStore.pdb
 /Users/tanya/Projects/eBookStore/eBookStore/obj/Debug/net6.0/eBookStore.genruntimeconfig.cache
 /Users/tanya/Projects/eBookStore/eBookStore/obj/Debug/net6.0/ref/eBookStore.dll
+/Users/tanya/Projects/eBookStore/eBookStore/bin/Debug/net6.0/Microsoft.AspNetCore.Cryptography.Internal.dll
+/Users/tanya/Projects/eBookStore/eBookStore/bin/Debug/net6.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+/Users/tanya/Projects/eBookStore/eBookStore/bin/Debug/net6.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+/Users/tanya/Projects/eBookStore/eBookStore/bin/Debug/net6.0/Microsoft.Extensions.Identity.Core.dll
+/Users/tanya/Projects/eBookStore/eBookStore/bin/Debug/net6.0/Microsoft.Extensions.Identity.Stores.dll

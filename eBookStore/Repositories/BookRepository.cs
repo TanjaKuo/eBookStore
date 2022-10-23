@@ -23,11 +23,7 @@ namespace eBookStore.Repositories
         {
             return await _bookDbContext.Book.ToListAsync();
         }
-
-        public async Task<IEnumerable<Book>> GetAllBooksWithBookingNumber(Guid bookingNumber)
-        {
-            return await _bookDbContext.Book.Include(nameof(Reserve)).ToListAsync();
-        }
+        
 
         public async Task<IEnumerable<Book>> GetSearchBooks(string searchString)
         {
@@ -38,8 +34,6 @@ namespace eBookStore.Repositories
         {
             return await _bookDbContext.Book.FirstOrDefaultAsync(m => m.Id == id);
         }
-
-
 
         public async Task<Book> UpdateBooking(Guid id, Guid? bookingNumber, string? userName)
         {

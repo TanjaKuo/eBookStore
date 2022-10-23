@@ -10,9 +10,7 @@ namespace eBookStore.Repositories
     {
 
         private readonly BookDbContext _bookDbContext;
-        //private readonly UserManager<IdentityUser> _userManager;
-        //private readonly SignInManager<IdentityUser> _signInManager;
-
+      
         public ReserveRepository(BookDbContext bookDbContext)
         {
             _bookDbContext = bookDbContext;
@@ -20,8 +18,7 @@ namespace eBookStore.Repositories
         }
 
      
-
-        public async Task GenerateBookingNumberAsync(Guid bookId, IdentityUser user2)
+        public async Task GenerateBookingNumberAsync(Guid bookId, IdentityUser user)
         {
             var newBookingNumber = new Reserve
             {
@@ -29,7 +26,7 @@ namespace eBookStore.Repositories
                 BookingNumber = Guid.NewGuid(),
                 BookId = bookId,
                 ReservedTime = DateTime.Now,
-                UserName = user2.UserName
+                UserName = user.UserName
             };
 
             await _bookDbContext.Reserves.AddAsync(newBookingNumber);

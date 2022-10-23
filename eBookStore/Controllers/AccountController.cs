@@ -16,10 +16,7 @@ namespace eBookStore.Controllers
         private readonly SignInManager<IdentityUser> _signInManager;
 
 
-        public AccountController(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager
-            )
+        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -39,7 +36,7 @@ namespace eBookStore.Controllers
 
             if (checkUserExisting != null)
             {
-                TempData["notification"] = "Failed created the account. Try another name";
+                TempData["Error"] = "Wrong credentials. Please, try again!";
             }
 
             var newUser = new IdentityUser
@@ -51,12 +48,12 @@ namespace eBookStore.Controllers
 
             if(identityResult.Succeeded)
             {
-                TempData["notification"] = "Account has been created. You can login to reserve the book now";
+                TempData["Success"] = "Account has been created. You can login to reserve the book now";
                 return RedirectToAction("Login");
             }
             else
             {
-                TempData["notification"] = "Failed created the account. Please try again";
+                TempData["Error"] = "Wrong credentials. Please, try again!";
                 return View();
             }
         }
@@ -64,11 +61,6 @@ namespace eBookStore.Controllers
 
         public IActionResult Login()
         {
-            string notification;
-
-            if (TempData.ContainsKey("notification"))
-                notification = TempData["notification"].ToString(); 
-
             return View();
         }
 
@@ -90,10 +82,10 @@ namespace eBookStore.Controllers
                         return RedirectToAction("Index", "Book");
                     }
                 }
-                TempData["Error"] = "Wrong credentials. Please, try again!";
+                ViewData["Error"] = "Wrong credentials. Please, try again!";
                 return View();
             }
-            TempData["Error"] = "Wrong credentials. Please, try again!";
+            ViewData["Error"] = "Wrong credentials. Please, try again!";
             return View();
         }
 

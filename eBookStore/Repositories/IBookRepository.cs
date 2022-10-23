@@ -8,7 +8,7 @@ namespace eBookStore.Repositories
     {
         Task<IEnumerable<Book>> GetAllBooks();
 
-        Task<IEnumerable<Book>> GetAllBooksWithBookingNumber(Guid bookingNumber);
+       //Task<IEnumerable<Book>> GetAllBooksWithBookingNumber(Guid bookingNumber);
 
 
         Task<IEnumerable<Book>> GetSearchBooks(string searchString);

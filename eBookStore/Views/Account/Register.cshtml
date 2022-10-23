@@ -5,6 +5,15 @@
     ViewData["Title"] = "Register";
 }
 
+@if (TempData["Error"] != null || ViewData["Error"] != null)
+{
+    <div class="container">
+        <div class="alert alert-danger alert-dismissible fade show mb-5" role="alert">
+            @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+}
 
 
 <div class="cotainer mx-auto">
@@ -16,13 +25,13 @@
                 <div class="mb-3">
                     <label class="form-label">Username</label>
                     <input type="text" class="form-control" asp-for="Username" required />
-                    <span class="text-danger"></span>
+                    <span class="text-danger" asp-validation-for="Username"></span>
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Password</label>
+                    <label class="form-label">Password (must contains at least one number and upper and lower case)</label>
                     <input type="password" class="form-control" asp-for="Password" required minlength="6" />
-                    <span class="text-danger"></span>
+                    <span class="text-danger" asp-validation-for="Password"></span>
                 </div>
 
                 <div class="mb-3">

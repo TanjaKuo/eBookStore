@@ -1,15 +1,28 @@
 ﻿@model eBookStore.Models.UserViewModel
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<IdentityUser> signInManager;
 
 
 @{
     ViewData["Title"] = "Login";
 }
 
-@if (Model != null)
- {
+@if (TempData["Error"] != null || ViewData["Error"] != null)
+{
+    <div class="container">
+        <div class="alert alert-danger alert-dismissible fade show mb-5" role="alert">
+            @TempData["Error"]
+            @ViewData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+}
+
+@if (TempData["Success"] != null)
+{
     <div class="container">
         <div class="alert alert-success alert-dismissible fade show mb-5" role="alert">
-            @TempData["notification"]
+            @TempData["Success"]
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     </div>
@@ -20,18 +33,18 @@
     <div class="row justify-content-center">
         <div class="col-12 col-lg-6">
             <h1 class="mt-5 mb-3 h3">Login</h1>
-
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <form method="post">
                 <div class="mb-3">
                     <label class="form-label">Username</label>
                     <input type="text" class="form-control" asp-for="Username" required />
-                    <span class="text-danger"></span>
+                    <span class="text-danger" asp-validation-for="Username"></span>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Password</label>
                     <input type="password" class="form-control" asp-for="Password" required minlength="6" />
-                    <span class="text-danger"></span>
+                    <span class="text-danger" asp-validation-for="Password"></span>
                 </div>
 
                 <div class="mb-3">

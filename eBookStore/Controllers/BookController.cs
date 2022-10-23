@@ -23,8 +23,6 @@ namespace eBookStore.Controllers
 
         private readonly UserManager<IdentityUser> _userManager;
 
-        public string UserName { get; set; }
-
 
         public BookController(IBookRepository bookRepository,
             IReserveRepository reserveRepository,
@@ -92,11 +90,10 @@ namespace eBookStore.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        // Guid id, [Bind("Id,Title,Reserve")] Book book
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Title,Reserve,ReserveNumber")] Book book, UserViewModel user)
+        public async Task<IActionResult> Edit([Bind("Id,Title,Reserve,ReserveNumber")] Book book)
         {
             //var user2 = await _userManager.FindByEmailAsync(User.Identity.Name);
-             var user2 = await _userManager.FindByNameAsync(User.Identity.Name);
+            var existingUser = await _userManager.FindByNameAsync(User.Identity.Name);
             var specifBook = new Book
             {
                 Id = book.Id,
@@ -104,13 +101,13 @@ namespace eBookStore.Controllers
                 Reserve = book.Reserve,
             };
 
-            if(specifBook != null && user2 != null)
+            if(specifBook != null && existingUser != null)
             {
                 if(specifBook.Reserve == true)
                 {
 
                     //await _reserveRepository.GenerateBookingNumberAsync(book.Id, user);
-                    await _reserveRepository.GenerateBookingNumberAsync(book.Id, user2);
+                    await _reserveRepository.GenerateBookingNumberAsync(book.Id, existingUser);
 
                     var bookNumber = await _reserveRepository.GetBookingNumberAsync(book.Id);
                     var reservedName = await _reserveRepository.GetReserveNameAsync(book.Id);

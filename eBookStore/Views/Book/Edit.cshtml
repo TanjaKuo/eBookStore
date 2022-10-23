@@ -7,9 +7,8 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
 
-<h4>Book</h4>
+<h3>Reserve Book</h3>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -17,7 +16,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
+                <label asp-for="Title" class="control-label mb-3"></label>
                 <input asp-for="Title" class="form-control" readonly />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
@@ -26,59 +25,48 @@
             {
                 @if (signInManager.IsSignedIn(User) && Model.UserName == User?.Identity?.Name)
                 {
-                    @*<div class="me-3 text-dark">
-                    <h2> yeah wooo  @User?.Identity?.Name </h2>
-                </div>*@
-                    <div class="form-group form-check">
+                    <div class="form-group form-check mt-3">
                         <label class="form-check-label">
-                            <input class="form-check-input" asp-for="Reserve" /> @Html.DisplayNameFor(model => model.Reserve)
+                            <input class="form-check-input mb-3" asp-for="Reserve" /> @Html.DisplayNameFor(model => model.Reserve)
                         </label>
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Save" class="btn btn-primary" />
+                        <input type="submit" value="Save" class="btn btn-dark mb-3" />
+                        <a class="btn bg-dark text-light me-3" asp-action="Index">Back to List</a>
                     </div>
 
                 }
                 else
                 {
-                    <div class="form-group form-check">
+                    <div class="form-group form-check mt-5">
                         <label class="form-check-label">
                             <p>Sorry, has been book by user @Model.UserName</p>
                             <input class="form-check-input" asp-for="Reserve" hidden />
                         </label>
                     </div>
-
+                    <div class="form-group">
+                        <a class="btn bg-dark text-light me-3" asp-action="Index">Back to List</a>
+                    </div>
                 }
             }
             else
             {
-                <div class="form-group form-check">
+                <div class="form-group form-check mt-3">
                     <label class="form-check-label">
-                        <input class="form-check-input" asp-for="Reserve" /> @Html.DisplayNameFor(model => model.Reserve)
+                        <input class="form-check-input mb-3" asp-for="Reserve" /> @Html.DisplayNameFor(model => model.Reserve)
                     </label>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <input type="submit" value="Save" class="btn bg-dark text-light me-3" />
+                    <a class="btn bg-dark text-light me-3" asp-action="Index">Back to List</a>
                 </div>
 
             }
 
-
-            @*<div class="form-group form-check">
-            <label class="form-check-label">
-                <input class="form-check-input" asp-for="Reserve" /> @Html.DisplayNameFor(model => model.Reserve)
-            </label>
-        </div>*@
-            @*<div class="form-group">
-            <input type="submit" value="Save" class="btn btn-primary" />
-        </div>*@
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

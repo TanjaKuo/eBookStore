@@ -12,6 +12,7 @@ namespace eBookStore.Models
 
         public bool Reserve { get; set; }
 
+        [Display(Name = "Booking Number")]
         public Guid? BookingNumber { get; set; }
 
         public string? UserName { get; set; }

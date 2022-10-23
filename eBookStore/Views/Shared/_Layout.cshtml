@@ -29,26 +29,21 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Book" asp-action="Index">Books</a>
                         </li>
-                        @*<li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
-                        </li>*@
+                     
                     </ul>
                     <div class="d-flex align-items-center">
 
                         @if (signInManager.IsSignedIn(User))
                             {
                             <div class="me-3 text-dark">
-                                @User?.Identity?.Name
+                                @User?.Identity?.Name.ToUpper()
                             </div>
-                            <a asp-controller="Account" asp-action="Logout" class="btn bg-light text-dark me-3">Logout</a>
+                            <a asp-controller="Account" asp-action="Logout" class="btn bg-dark text-light me-3">Logout</a>
                         }
                         else
                         {
-                            <a asp-controller="Account" asp-action="Login" class="btn bg-light text-dark me-3">Login</a>
-                            <a asp-controller="Account" asp-action="Register" class="btn bg-light text-dark me-3">Register</a>
+                            <a asp-controller="Account" asp-action="Login" class="btn bg-dark text-light me-3">Login</a>
+                            <a asp-controller="Account" asp-action="Register" class="btn bg-dark text-light me-3">Register</a>
                         }
 
                     </div>

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
 using eBookStore.Models;
-using eBookStore.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,19 +15,12 @@ namespace eBookStore.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
 
-        //private readonly IAccountRepository _accountRepository;
-
-        private readonly IReserveRepository _reserveRepository;
-
 
         public AccountController(
-            IReserveRepository reserveRepository,
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager
             )
         {
-           // _accountRepository = accountRepository;
-            _reserveRepository = reserveRepository;
             _userManager = userManager;
             _signInManager = signInManager;
         }
@@ -67,30 +59,9 @@ namespace eBookStore.Controllers
                 TempData["notification"] = "Failed created the account. Please try again";
                 return View();
             }
-
-            
-
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Register(User user)
-        //{
 
-        //    if(user != null)
-        //    {
-        //        await _accountRepository.CreateUserAsync(user);
-        //        TempData["notification"] = "Account has been created. You can login to reserve the book now";
-        //    }
-        //    else
-        //    {
-        //        TempData["notification"] = "Failed created the account. Please try again";
-        //    }
-
-        //    return RedirectToAction("Login");
-        //}
-
-        // GET: /<controller>/
         public IActionResult Login()
         {
             string notification;
@@ -116,9 +87,7 @@ namespace eBookStore.Controllers
                     var result = await _signInManager.PasswordSignInAsync(user, userViewModel.Password, false, false);
                     if(result.Succeeded)
                     {
-                       // await _reserveRepository.UpdateUserName(user.UserName);
-
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Book");
                     }
                 }
                 TempData["Error"] = "Wrong credentials. Please, try again!";
@@ -128,27 +97,14 @@ namespace eBookStore.Controllers
             return View();
         }
 
-        //[HttpPost]
+
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Book");
         }
 
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Login(User user)
-        //{
-        //    var isUserValid = await _accountRepository.CheckUserIsValidAsync(user);
-
-        //    if (isUserValid)
-        //    {
-        //        return RedirectToAction("Index", "Home");
-        //    }
-
-        //    return View();
-        //}
     }
 }
 

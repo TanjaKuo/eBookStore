@@ -17,13 +17,10 @@ namespace eBookStore.Repositories
 
         Task<Book> UpdateReserve(Book book);
 
-        //Task<Book> UpdateBookingNumber(Guid id, Guid? bookingNumber);
-
-        //Task<Book> UpdateReserveName(Guid id, string? userName);
+        
 
         Task<Book> UpdateBooking(Guid id, Guid? bookingNumber, string? userName);
 
-        //Task<Book> UpdateBookingNumber(Guid id, Guid? bookingNumber, UserViewModel user);
 
     }
 }

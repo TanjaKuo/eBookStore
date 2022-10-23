@@ -39,8 +39,8 @@
                     <div class="d-flex align-items-center">
 
                         @if (signInManager.IsSignedIn(User))
-                        {
-                            <div class="me-3 text-light">
+                            {
+                            <div class="me-3 text-dark">
                                 @User?.Identity?.Name
                             </div>
                             <a asp-controller="Account" asp-action="Logout" class="btn bg-light text-dark me-3">Logout</a>
@@ -64,7 +64,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2022 - eBookStore - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2022 - made with Tanya
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

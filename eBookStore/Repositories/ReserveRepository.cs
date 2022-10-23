@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Net;
 using eBookStore.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace eBookStore.Repositories
@@ -8,25 +10,95 @@ namespace eBookStore.Repositories
     {
 
         private readonly BookDbContext _bookDbContext;
-        public ReserveRepository(BookDbContext bookDbContext)
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
+
+        public ReserveRepository(BookDbContext bookDbContext,
+            UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> signInManager
+            )
         {
             _bookDbContext = bookDbContext;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
-        public async Task GenerateBookingNumberAsync(Guid bookId)
+        //public async Task GenerateBookingNumberAsync(Guid bookId)
+        //{
+
+        //    var newBookingNumber = new Reserve
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        BookingNumber = Guid.NewGuid(),
+        //        BookId = bookId,
+        //        ReservedTime = DateTime.Now,
+        //        //UserName =  (await _userManager
+        //        //UserName = user.Username
+        //    };
+
+        //    await _bookDbContext.Reserves.AddAsync(newBookingNumber);
+        //    await _bookDbContext.SaveChangesAsync();
+
+        //}
+
+        //public async Task GenerateBookingNumberAsync(Guid bookId, UserViewModel user)
+        //{
+        //    var newBookingNumber = new Reserve
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        BookingNumber = Guid.NewGuid(),
+        //        BookId = bookId,
+        //        ReservedTime = DateTime.Now,
+        //        UserName = _signInManager.ToString()
+        //    };
+
+        //    await _bookDbContext.Reserves.AddAsync(newBookingNumber);
+        //    await _bookDbContext.SaveChangesAsync();
+        //}
+
+        //public async Task GenerateBookingNumberAsync(Guid bookId, UserManager<IdentityUser> user)
+        //{
+        //    var newBookingNumber = new Reserve
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        BookingNumber = Guid.NewGuid(),
+        //        BookId = bookId,
+        //        ReservedTime = DateTime.Now,
+        //        //UserName = user.FindByNameAsync(user.);
+        //};
+
+        //    await _bookDbContext.Reserves.AddAsync(newBookingNumber);
+        //    await _bookDbContext.SaveChangesAsync();
+        //}
+
+        public async Task GenerateBookingNumberAsync(Guid bookId, IdentityUser user2)
         {
             var newBookingNumber = new Reserve
             {
                 Id = Guid.NewGuid(),
                 BookingNumber = Guid.NewGuid(),
                 BookId = bookId,
-                ReservedTime = DateTime.Now
+                ReservedTime = DateTime.Now,
+                UserName = user2.UserName
+                //UserName = user.FindByNameAsync(user.);
             };
 
             await _bookDbContext.Reserves.AddAsync(newBookingNumber);
             await _bookDbContext.SaveChangesAsync();
-
         }
+
+
+        //public async Task UpdateUserName(string name)
+        //{
+        //    var theUser = new Reserve
+        //    {
+        //        UserName =  name
+        //    };
+
+        //    await _bookDbContext.Reserves.AddAsync(theUser);
+        //    await _bookDbContext.SaveChangesAsync();
+        //}
+
 
         //public async Task<Guid> GetBookingNumberAsync(Guid bookId)
         //{
@@ -91,7 +163,23 @@ namespace eBookStore.Repositories
              
         }
 
-       
+        public async Task<string?> GetReserveNameAsync(Guid bookId)
+        {
+            var checkingBookId = await _bookDbContext.Reserves.FirstOrDefaultAsync(x => x.BookId == bookId);
+
+            var reservedTime = await _bookDbContext.Reserves.OrderByDescending(x => x.ReservedTime).FirstOrDefaultAsync();
+
+            if (checkingBookId != null || reservedTime != null)
+            {
+
+                return reservedTime.UserName;
+            }
+
+            return null;
+        }
+
+
+
         //public async Task<Guid> GetBookingNumberAsync(Guid bookId)
         //{
 

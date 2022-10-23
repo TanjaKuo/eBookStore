@@ -11,6 +11,7 @@ namespace eBookStore.Models
 
         public DateTime ReservedTime { get; set; }
 
+        public string? UserName { get; set; }
     }
 }
 

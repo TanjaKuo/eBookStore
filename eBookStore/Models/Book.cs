@@ -14,6 +14,8 @@ namespace eBookStore.Models
 
         public Guid? BookingNumber { get; set; }
 
+        public string? UserName { get; set; }
+
         // navigation 
         public ICollection<Reserve> ReserveDetails { get; set; }
 

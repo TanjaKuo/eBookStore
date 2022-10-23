@@ -20,10 +20,12 @@ namespace eBookStore.Controllers
 
         private readonly IReserveRepository _reserveRepository;
 
+
         public AccountController(
             IReserveRepository reserveRepository,
             UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            SignInManager<IdentityUser> signInManager
+            )
         {
            // _accountRepository = accountRepository;
             _reserveRepository = reserveRepository;
@@ -114,6 +116,8 @@ namespace eBookStore.Controllers
                     var result = await _signInManager.PasswordSignInAsync(user, userViewModel.Password, false, false);
                     if(result.Succeeded)
                     {
+                       // await _reserveRepository.UpdateUserName(user.UserName);
+
                         return RedirectToAction("Index", "Home");
                     }
                 }

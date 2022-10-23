@@ -1,5 +1,6 @@
 ﻿using System;
 using eBookStore.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,9 +10,12 @@ namespace eBookStore.Repositories
     {
         private readonly BookDbContext _bookDbContext;
 
-        public BookRepository(BookDbContext bookDbContext)
+        private readonly SignInManager<IdentityUser> _signInManager;
+
+        public BookRepository(BookDbContext bookDbContext, SignInManager<IdentityUser> signInManager)
         {
             _bookDbContext = bookDbContext;
+            _signInManager = signInManager;
         }
 
    
@@ -36,21 +40,64 @@ namespace eBookStore.Repositories
         }
 
 
-        public async Task<Book> UpdateBookingNumber(Guid id, Guid? bookingNumber)
+        //public async Task<Book> UpdateBookingNumber(Guid id, Guid? bookingNumber)
+        //{
+        //    var existingBook = await _bookDbContext.Book.FirstOrDefaultAsync(x => x.Id == id);
+
+        //    if (existingBook != null)
+        //    {
+        //        existingBook.BookingNumber = bookingNumber;
+        //    }
+
+        //    await _bookDbContext.SaveChangesAsync();
+        //    return existingBook;
+
+        //}
+
+        //public async Task<Book> UpdateReserveName(Guid id, string? userName)
+        //{
+        //    var existingBook = await _bookDbContext.Book.FirstOrDefaultAsync(x => x.Id == id);
+
+        //    if (existingBook != null)
+        //    {
+        //        existingBook.UserName = userName;
+        //    }
+
+        //    await _bookDbContext.SaveChangesAsync();
+        //    return existingBook;
+        //}
+
+        public async Task<Book> UpdateBooking(Guid id, Guid? bookingNumber, string? userName)
         {
             var existingBook = await _bookDbContext.Book.FirstOrDefaultAsync(x => x.Id == id);
 
             if (existingBook != null)
             {
                 existingBook.BookingNumber = bookingNumber;
+                existingBook.UserName = userName;
             }
 
             await _bookDbContext.SaveChangesAsync();
             return existingBook;
-
         }
 
-        
+        //public async Task<Book> UpdateBookingNumber(Guid id, Guid? bookingNumber, UserViewModel user)
+        //{
+        //    var existingBook = await _bookDbContext.Book.FirstOrDefaultAsync(x => x.Id == id);
+
+        //    var userName = user.Username;
+
+        //    //var reserveUser = _signInManager.IsSignedIn(user);
+
+        //    if (existingBook != null)
+        //    {
+        //        existingBook.BookingNumber = bookingNumber;
+        //        existingBook.UserName = userName;
+        //    }
+
+        //    await _bookDbContext.SaveChangesAsync();
+        //    return existingBook;
+        //}
 
         public async Task<Book> UpdateReserve(Book book)
         {
@@ -61,14 +108,16 @@ namespace eBookStore.Repositories
                 existingBook.Id = book.Id;
                 existingBook.Title = book.Title;
                 existingBook.Reserve = book.Reserve;
-                //existingBook.BookingNumber = null;
+                
                 if (book.Reserve == true)
                 {
                     existingBook.BookingNumber = existingBook.BookingNumber;
+                    existingBook.UserName = existingBook.UserName;
                 }
                 else
                 {
                     existingBook.BookingNumber = null;
+                    existingBook.UserName = null;
                 }
 
             }
@@ -77,6 +126,7 @@ namespace eBookStore.Repositories
             return existingBook;
         }
 
+        
     }
 }
 

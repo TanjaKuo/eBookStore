@@ -8,19 +8,33 @@ using Microsoft.EntityFrameworkCore;
 using eBookStore.Models;
 using eBookStore.Repositories;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace eBookStore.Controllers
 {
+    [Authorize]
     public class BookController : Controller
     {
         private readonly IBookRepository _bookRepository;
 
         private readonly IReserveRepository _reserveRepository;
 
-        public BookController(IBookRepository bookRepository, IReserveRepository reserveRepository)
+        private readonly SignInManager<IdentityUser> _signInManager;
+
+        private readonly UserManager<IdentityUser> _userManager;
+
+        public string UserName { get; set; }
+
+
+        public BookController(IBookRepository bookRepository,
+            IReserveRepository reserveRepository,
+            SignInManager<IdentityUser> signInManager,
+            UserManager<IdentityUser> userManager)
         {
             _bookRepository = bookRepository;
             _reserveRepository = reserveRepository;
+            _signInManager = signInManager;
+            _userManager = userManager;
         }
 
       
@@ -79,8 +93,10 @@ namespace eBookStore.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         // Guid id, [Bind("Id,Title,Reserve")] Book book
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Title,Reserve,ReserveNumber")] Book book)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Title,Reserve,ReserveNumber")] Book book, UserViewModel user)
         {
+            //var user2 = await _userManager.FindByEmailAsync(User.Identity.Name);
+             var user2 = await _userManager.FindByNameAsync(User.Identity.Name);
             var specifBook = new Book
             {
                 Id = book.Id,
@@ -88,13 +104,20 @@ namespace eBookStore.Controllers
                 Reserve = book.Reserve,
             };
 
-            if(specifBook != null)
+            if(specifBook != null && user2 != null)
             {
                 if(specifBook.Reserve == true)
                 {
-                    await _reserveRepository.GenerateBookingNumberAsync(book.Id);
-                    var abc = await _reserveRepository.GetBookingNumberAsync(book.Id);
-                    await _bookRepository.UpdateBookingNumber(book.Id, abc);
+
+                    //await _reserveRepository.GenerateBookingNumberAsync(book.Id, user);
+                    await _reserveRepository.GenerateBookingNumberAsync(book.Id, user2);
+
+                    var bookNumber = await _reserveRepository.GetBookingNumberAsync(book.Id);
+                    var reservedName = await _reserveRepository.GetReserveNameAsync(book.Id);
+                    //await _bookRepository.UpdateBookingNumber(book.Id, abc, user);
+                    //await _bookRepository.UpdateBookingNumber(book.Id, bookNumber);
+                    //await _bookRepository.UpdateReserveName(book.Id, reservedName);
+                    await _bookRepository.UpdateBooking(book.Id, bookNumber, reservedName);
                 }
                 await _bookRepository.UpdateReserve(specifBook);
 
